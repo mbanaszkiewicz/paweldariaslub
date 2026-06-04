@@ -12,17 +12,17 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
       {/* Marble — fills any gap the photo doesn't cover */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "url('/marble.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "blur(2px) brightness(0.92)"
-        }}
-      />
+      <div className="absolute inset-0" style={{ filter: "blur(2px) brightness(0.92)" }}>
+        <Image
+          src="/marble.jpg"
+          alt=""
+          fill
+          className="object-cover object-center"
+          priority
+        />
+      </div>
 
-      {/* Couple photo — as large as possible, object-fit cover */}
+      {/* Couple photo — fills the full viewport */}
       <div className="absolute inset-0">
         <Image
           src="/hero photo.jpg"
@@ -68,7 +68,7 @@ export default function Hero() {
           className="mt-5 text-xs uppercase tracking-[4px]"
           style={{ color: "rgba(201,164,108,0.6)", fontFamily: "var(--font-lato)" }}
         >
-          Sala Maksymiliana w Zamku Książ
+          {weddingData.venue.name}
         </p>
         <a
           href={weddingData.venue.mapUrl}

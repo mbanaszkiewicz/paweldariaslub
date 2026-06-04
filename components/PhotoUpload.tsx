@@ -44,6 +44,20 @@ export default function PhotoUpload() {
         >
           zeskanuj, aby dodać zdjęcia
         </p>
+
+        <a
+          href={weddingData.photoShareUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-block mt-4 text-xs uppercase tracking-[3px] border-b transition-opacity hover:opacity-60"
+          style={{
+            color: "rgba(201,164,108,0.7)",
+            borderColor: "rgba(201,164,108,0.3)",
+            fontFamily: "var(--font-lato)"
+          }}
+        >
+          lub otwórz galerię w przeglądarce →
+        </a>
       </div>
     </section>
   );
