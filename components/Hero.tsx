@@ -25,7 +25,7 @@ export default function Hero() {
       {/* Couple photo — fills the full viewport */}
       <div className="absolute inset-0">
         <Image
-          src="/hero photo.jpg"
+          src="/hero.jpg"
           alt="Daria i Paweł"
           fill
           priority
