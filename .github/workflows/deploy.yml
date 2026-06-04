@@ -25,6 +25,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
+          NEXT_PUBLIC_BASE_PATH: /paweldariaslub
           NEXT_PUBLIC_PHONE_MIKOLAJ: ${{ secrets.PHONE_MIKOLAJ }}
           NEXT_PUBLIC_PHONE_NATALIA: ${{ secrets.PHONE_NATALIA }}
           NEXT_PUBLIC_PHOTO_URL: ${{ secrets.PHOTO_URL }}
