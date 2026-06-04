@@ -1,6 +1,7 @@
 "use client";
 
 import { QRCodeSVG } from "qrcode.react";
+import { Camera } from "lucide-react";
 import { weddingData } from "@/config/wedding";
 
 export default function PhotoUpload() {
@@ -8,10 +9,7 @@ export default function PhotoUpload() {
     <section className="py-24 px-6" style={{ backgroundColor: "var(--primary)" }}>
       <div className="max-w-xl mx-auto text-center">
         <div className="flex justify-center mb-6" style={{ color: "var(--secondary)" }}>
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-            <circle cx="12" cy="13" r="4"/>
-          </svg>
+          <Camera size={36} strokeWidth={1} />
         </div>
 
         <h2 className="section-title">Wasze zdjęcia</h2>

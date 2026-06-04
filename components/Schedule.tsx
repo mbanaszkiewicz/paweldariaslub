@@ -1,26 +1,22 @@
+import { Wine, Camera, Mail } from "lucide-react";
 import { weddingData } from "@/config/wedding";
 
 const icons = [
-  // rings
-  <svg key="rings" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg>,
-  // two wine glasses clinking
-  <svg key="toast" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-    {/* left glass */}
-    <path d="M4 3 L10 3 C10 3 11 8 8 10 L8 17 L6 19 L10 19"/>
-    <path d="M4 3 C4 3 3 8 6 10"/>
-    {/* right glass */}
-    <path d="M14 3 L20 3 C20 3 21 8 18 10 L18 17 L16 19 L20 19"/>
-    <path d="M14 3 C14 3 13 8 16 10"/>
-    {/* clink sparkle */}
-    <line x1="11" y1="2" x2="13" y2="2"/>
-    <line x1="12" y1="1" x2="12" y2="3"/>
+  // two wedding bands
+  <svg key="rings" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+    <circle cx="9" cy="12" r="5"/>
+    <circle cx="15" cy="12" r="5"/>
   </svg>,
-  // camera
-  <svg key="camera" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>,
-  // envelope / gift
-  <svg key="envelope" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><rect x="2" y="5" width="20" height="14" rx="1"/><polyline points="2,5 12,13 22,5"/></svg>,
-  // fork & knife
-  <svg key="dinner" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><line x1="18" y1="3" x2="18" y2="21"/><path d="M10 3v6a3 3 0 0 0 3 3h0v9"/><path d="M7 3v4"/><path d="M13 3v4"/></svg>
+  <Wine key="toast" size={20} />,
+  <Camera key="camera" size={20} />,
+  <Mail key="wishes" size={20} />,
+  // serving cloche
+  <svg key="cloche" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+    <ellipse cx="12" cy="18" rx="9" ry="2"/>
+    <path d="M3 16 Q3 8 12 8 Q21 8 21 16"/>
+    <line x1="12" y1="8" x2="12" y2="5"/>
+    <circle cx="12" cy="4.5" r="1.5"/>
+  </svg>
 ];
 
 export default function Schedule() {
@@ -51,11 +47,7 @@ export default function Schedule() {
             <div className="pt-3">
               <p
                 className="text-2xl leading-none"
-                style={{
-                  fontFamily: "var(--font-cormorant)",
-                  color: "var(--secondary)",
-                  fontWeight: 600
-                }}
+                style={{ fontFamily: "var(--font-cormorant)", color: "var(--secondary)", fontWeight: 600 }}
               >
                 {item.time}
               </p>
