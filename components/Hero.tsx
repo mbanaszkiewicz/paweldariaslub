@@ -1,8 +1,39 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { weddingData } from "@/config/wedding";
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
+const bannerImages = [
+  `${base}/banner/amber-martin-9pvTSsNV2T4-unsplash.jpg`,
+  `${base}/banner/aperture-vintage-SshYpuf607g-unsplash.jpg`,
+  `${base}/banner/marble.jpg`,
+  `${base}/banner/nastasia-kalinina-uKXKSR7R7Qc-unsplash.jpg`,
+  `${base}/banner/nikola-tomasic-U0PdX-CO5VQ-unsplash.jpg`,
+  `${base}/banner/rene-bohmer-YeUVDKZWSZ4-unsplash.jpg`,
+  `${base}/banner/susan-wilkinson-GaKIWjTppAU-unsplash.jpg`,
+  `${base}/banner/vows-on-the-move-p0vZplFhKYI-unsplash.jpg`,
+];
+
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
+  const [fading, setFading] = useState(false);
+
+  const goTo = useCallback((index: number) => {
+    setFading(true);
+    setTimeout(() => {
+      setCurrent((index + bannerImages.length) % bannerImages.length);
+      setFading(false);
+    }, 400);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => goTo(current + 1), 6000);
+    return () => clearInterval(id);
+  }, [current, goTo]);
+
   const date = new Date(weddingData.weddingDate);
   const formatted = date.toLocaleDateString("pl-PL", {
     day: "2-digit",
@@ -12,27 +43,62 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
-      {/* Marble — fills any gap */}
-      <div
-        className="absolute inset-0"
+      {/* Carousel background */}
+      <img
+        key={current}
+        src={bannerImages[current]}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover object-center"
         style={{
-          backgroundImage: `url('${base}/marble.jpg')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "blur(2px) brightness(0.92)"
+          transition: "opacity 0.4s ease",
+          opacity: fading ? 0 : 1
         }}
       />
 
-      {/* Couple photo */}
+      {/* Couple photo on top */}
       <img
         src={`${base}/hero.jpg`}
         alt="Daria i Paweł"
         className="absolute inset-0 w-full h-full object-cover object-top"
       />
 
+      {/* Prev / Next arrows */}
+      <button
+        onClick={() => goTo(current - 1)}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 transition-opacity hover:opacity-70"
+        style={{ color: "rgba(255,255,255,0.5)" }}
+        aria-label="Poprzednie zdjęcie"
+      >
+        <ChevronLeft size={32} strokeWidth={1} />
+      </button>
+      <button
+        onClick={() => goTo(current + 1)}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 transition-opacity hover:opacity-70"
+        style={{ color: "rgba(255,255,255,0.5)" }}
+        aria-label="Następne zdjęcie"
+      >
+        <ChevronRight size={32} strokeWidth={1} />
+      </button>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {bannerImages.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className="w-1.5 h-1.5 rounded-full transition-all"
+            style={{
+              background: i === current ? "var(--secondary)" : "rgba(255,255,255,0.35)",
+              transform: i === current ? "scale(1.4)" : "scale(1)"
+            }}
+            aria-label={`Zdjęcie ${i + 1}`}
+          />
+        ))}
+      </div>
+
       {/* Bottom gradient with text */}
       <div
-        className="absolute bottom-0 left-0 right-0 px-8 pb-12 pt-32 text-center"
+        className="absolute bottom-0 left-0 right-0 px-8 pb-16 pt-32 text-center z-10"
         style={{ background: "linear-gradient(to top, rgba(8,7,5,0.88) 40%, rgba(8,7,5,0.4) 70%, transparent)" }}
       >
         <div className="flex items-center justify-center gap-4 mb-5 max-w-xs mx-auto">
