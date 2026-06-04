@@ -7,7 +7,7 @@ import { weddingData } from "@/config/wedding";
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export default function Hero({ bannerImages }: { bannerImages: string[] }) {
-  const images = images.map(src => `${base}${src}`);
+  const images = bannerImages.map(src => `${base}${src}`);
   const [current, setCurrent] = useState(0);
   const [pickerOpen, setPickerOpen] = useState(false);
 
