@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { weddingData } from "@/config/wedding";
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -19,20 +19,10 @@ const bannerImages = [
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
-  const [fading, setFading] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
 
-  const goTo = useCallback((index: number) => {
-    setFading(true);
-    setTimeout(() => {
-      setCurrent((index + bannerImages.length) % bannerImages.length);
-      setFading(false);
-    }, 400);
-  }, []);
-
-  useEffect(() => {
-    const id = setInterval(() => goTo(current + 1), 6000);
-    return () => clearInterval(id);
-  }, [current, goTo]);
+  const prev = () => setCurrent((current - 1 + bannerImages.length) % bannerImages.length);
+  const next = () => setCurrent((current + 1) % bannerImages.length);
 
   const date = new Date(weddingData.weddingDate);
   const formatted = date.toLocaleDateString("pl-PL", {
@@ -43,62 +33,61 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
-      {/* Carousel background */}
+      {/* Selected hero image */}
       <img
-        key={current}
         src={bannerImages[current]}
         alt=""
         className="absolute inset-0 w-full h-full object-cover object-center"
-        style={{
-          transition: "opacity 0.4s ease",
-          opacity: fading ? 0 : 1
-        }}
+        style={{ transition: "opacity 0.4s ease" }}
       />
 
-      {/* Couple photo on top */}
-      <img
-        src={`${base}/hero.jpg`}
-        alt="Daria i Paweł"
-        className="absolute inset-0 w-full h-full object-cover object-top"
-      />
-
-      {/* Prev / Next arrows */}
+      {/* Toggle picker button */}
       <button
-        onClick={() => goTo(current - 1)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 transition-opacity hover:opacity-70"
-        style={{ color: "rgba(255,255,255,0.5)" }}
-        aria-label="Poprzednie zdjęcie"
+        onClick={() => setPickerOpen(o => !o)}
+        className="absolute top-4 right-4 z-30 p-2 rounded-full transition-opacity hover:opacity-80"
+        style={{ background: "rgba(0,0,0,0.35)", color: "rgba(255,255,255,0.7)" }}
+        aria-label="Wybierz zdjęcie tła"
       >
-        <ChevronLeft size={32} strokeWidth={1} />
-      </button>
-      <button
-        onClick={() => goTo(current + 1)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 transition-opacity hover:opacity-70"
-        style={{ color: "rgba(255,255,255,0.5)" }}
-        aria-label="Następne zdjęcie"
-      >
-        <ChevronRight size={32} strokeWidth={1} />
+        <Images size={18} />
       </button>
 
-      {/* Dot indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {bannerImages.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className="w-1.5 h-1.5 rounded-full transition-all"
-            style={{
-              background: i === current ? "var(--secondary)" : "rgba(255,255,255,0.35)",
-              transform: i === current ? "scale(1.4)" : "scale(1)"
-            }}
-            aria-label={`Zdjęcie ${i + 1}`}
-          />
-        ))}
-      </div>
+      {/* Carousel picker */}
+      {pickerOpen && (
+        <div
+          className="absolute top-14 right-4 z-30 p-3 rounded-xl flex flex-col gap-2"
+          style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)" }}
+        >
+          <div className="flex items-center gap-2">
+            <button onClick={prev} className="p-1 hover:opacity-70" style={{ color: "rgba(255,255,255,0.7)" }}>
+              <ChevronLeft size={18} />
+            </button>
+            <div className="flex gap-2 overflow-x-auto max-w-[260px]">
+              {bannerImages.map((src, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className="flex-shrink-0 rounded overflow-hidden"
+                  style={{
+                    width: 52,
+                    height: 52,
+                    outline: i === current ? "2px solid var(--secondary)" : "none",
+                    outlineOffset: 2
+                  }}
+                >
+                  <img src={src} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+            <button onClick={next} className="p-1 hover:opacity-70" style={{ color: "rgba(255,255,255,0.7)" }}>
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Bottom gradient with text */}
       <div
-        className="absolute bottom-0 left-0 right-0 px-8 pb-16 pt-32 text-center z-10"
+        className="absolute bottom-0 left-0 right-0 px-8 pb-12 pt-32 text-center z-10"
         style={{ background: "linear-gradient(to top, rgba(8,7,5,0.88) 40%, rgba(8,7,5,0.4) 70%, transparent)" }}
       >
         <div className="flex items-center justify-center gap-4 mb-5 max-w-xs mx-auto">
