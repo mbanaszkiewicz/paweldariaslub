@@ -1,19 +1,8 @@
-"use client";
-
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { weddingData } from "@/config/wedding";
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-export default function Hero({ bannerImages }: { bannerImages: string[] }) {
-  const images = bannerImages.map(src => `${base}${src}`);
-  const [current, setCurrent] = useState(0);
-  const [pickerOpen, setPickerOpen] = useState(false);
-
-  const prev = () => setCurrent((current - 1 + images.length) % images.length);
-  const next = () => setCurrent((current + 1) % images.length);
-
+export default function Hero() {
   const date = new Date(weddingData.weddingDate);
   const formatted = date.toLocaleDateString("pl-PL", {
     day: "2-digit",
@@ -23,57 +12,11 @@ export default function Hero({ bannerImages }: { bannerImages: string[] }) {
 
   return (
     <section className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
-      {/* Selected hero image */}
       <img
-        src={images[current]}
+        src={`${base}/banner/zamek_wybrany.jpg`}
         alt=""
         className="absolute inset-0 w-full h-full object-cover object-center"
-        style={{ transition: "opacity 0.4s ease" }}
       />
-
-      {/* Toggle picker button */}
-      <button
-        onClick={() => setPickerOpen(o => !o)}
-        className="absolute top-4 right-4 z-30 p-2 rounded-full transition-opacity hover:opacity-80"
-        style={{ background: "rgba(0,0,0,0.35)", color: "rgba(255,255,255,0.7)" }}
-        aria-label="Wybierz zdjęcie tła"
-      >
-        <Images size={18} />
-      </button>
-
-      {/* Carousel picker */}
-      {pickerOpen && (
-        <div
-          className="absolute top-14 right-4 z-30 p-3 rounded-xl flex flex-col gap-2"
-          style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)" }}
-        >
-          <div className="flex items-center gap-2">
-            <button onClick={prev} className="p-1 hover:opacity-70" style={{ color: "rgba(255,255,255,0.7)" }}>
-              <ChevronLeft size={18} />
-            </button>
-            <div className="flex gap-2 overflow-x-auto max-w-[260px]">
-              {images.map((src, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  className="flex-shrink-0 rounded overflow-hidden"
-                  style={{
-                    width: 52,
-                    height: 52,
-                    outline: i === current ? "2px solid var(--secondary)" : "none",
-                    outlineOffset: 2
-                  }}
-                >
-                  <img src={src} alt="" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
-            <button onClick={next} className="p-1 hover:opacity-70" style={{ color: "rgba(255,255,255,0.7)" }}>
-              <ChevronRight size={18} />
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Bottom gradient with text */}
       <div

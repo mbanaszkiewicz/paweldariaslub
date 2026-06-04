@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import Hero from "@/components/Hero";
 import Countdown from "@/components/Countdown";
 import Schedule from "@/components/Schedule";
@@ -9,16 +7,9 @@ import ContactSection from "@/components/ContactSection";
 import PhotoUpload from "@/components/PhotoUpload";
 
 export default function Home() {
-  const bannerDir = path.join(process.cwd(), "public", "banner");
-  const bannerImages = fs
-    .readdirSync(bannerDir)
-    .filter(f => /\.(jpe?g|png|webp)$/i.test(f))
-    .sort()
-    .map(f => `/banner/${f}`);
-
   return (
     <>
-      <Hero bannerImages={bannerImages} />
+      <Hero />
       <Countdown />
       <Schedule />
       <InfoCards />
