@@ -6,23 +6,13 @@ import { weddingData } from "@/config/wedding";
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-const bannerImages = [
-  `${base}/banner/amber-martin-9pvTSsNV2T4-unsplash.jpg`,
-  `${base}/banner/aperture-vintage-SshYpuf607g-unsplash.jpg`,
-  `${base}/banner/marble.jpg`,
-  `${base}/banner/nastasia-kalinina-uKXKSR7R7Qc-unsplash.jpg`,
-  `${base}/banner/nikola-tomasic-U0PdX-CO5VQ-unsplash.jpg`,
-  `${base}/banner/rene-bohmer-YeUVDKZWSZ4-unsplash.jpg`,
-  `${base}/banner/susan-wilkinson-GaKIWjTppAU-unsplash.jpg`,
-  `${base}/banner/vows-on-the-move-p0vZplFhKYI-unsplash.jpg`,
-];
-
-export default function Hero() {
+export default function Hero({ bannerImages }: { bannerImages: string[] }) {
+  const images = images.map(src => `${base}${src}`);
   const [current, setCurrent] = useState(0);
   const [pickerOpen, setPickerOpen] = useState(false);
 
-  const prev = () => setCurrent((current - 1 + bannerImages.length) % bannerImages.length);
-  const next = () => setCurrent((current + 1) % bannerImages.length);
+  const prev = () => setCurrent((current - 1 + images.length) % images.length);
+  const next = () => setCurrent((current + 1) % images.length);
 
   const date = new Date(weddingData.weddingDate);
   const formatted = date.toLocaleDateString("pl-PL", {
@@ -35,7 +25,7 @@ export default function Hero() {
     <section className="relative overflow-hidden" style={{ height: "100svh", minHeight: "600px" }}>
       {/* Selected hero image */}
       <img
-        src={bannerImages[current]}
+        src={images[current]}
         alt=""
         className="absolute inset-0 w-full h-full object-cover object-center"
         style={{ transition: "opacity 0.4s ease" }}
@@ -62,7 +52,7 @@ export default function Hero() {
               <ChevronLeft size={18} />
             </button>
             <div className="flex gap-2 overflow-x-auto max-w-[260px]">
-              {bannerImages.map((src, i) => (
+              {images.map((src, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
