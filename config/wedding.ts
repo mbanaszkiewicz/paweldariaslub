@@ -29,7 +29,7 @@ export const weddingData = {
     },
     {
       title: "Nocleg",
-      text: "Nie zapewniamy noclegów, dlatego zachęcamy do samodzielnej rezerwacji zakwaterowania. Ze względu na ograniczoną dostępność miejsc, warto zrobić to z wyprzedzeniem."
+      text: "Szanowni Państwo, że względów organizacyjnych nie jesteśmy w stanie zapewnić Państwu noclegów, dlatego zachęcamy do samodzielnej rezerwacji zakwaterowania w odpowiadającym Państwu obiekcie. Ze względu na ograniczoną dostępność miejsc, warto zrobić to z wyprzedzeniem.\nNa terenie Zamku znajdują się trzy hotele z czego jeden to hotel Zamku Książ.\nTel. +74 665 41 44\ne-mail: recepcja@hotelzamkowy.pl, w okolicy znajdują się również inne obiekty noclegowe."
     },
     {
       title: "Menu",

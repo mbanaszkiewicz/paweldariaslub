@@ -37,7 +37,7 @@ export default function InfoCards() {
               </div>
               <p
                 className="text-sm leading-relaxed"
-                style={{ color: "rgba(255,255,255,0.65)", fontFamily: "var(--font-lato)", fontWeight: 300 }}
+                style={{ color: "rgba(255,255,255,0.65)", fontFamily: "var(--font-lato)", fontWeight: 300, whiteSpace: "pre-line" }}
               >
                 {item.text}
               </p>
