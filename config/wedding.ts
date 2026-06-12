@@ -24,7 +24,7 @@ export const weddingData = {
   organization: [
     {
       title: "Dojazd",
-      text: "Na miejsce uroczystości można dotrzeć samodzielnie lub skorzystać z przygotowanego przez nas autokaru, który wyruszy z Łoziny oraz Wrocławia."
+      text: "Na miejsce uroczystości można dotrzeć samodzielnie lub skorzystać z przygotowanego przez nas autokaru, który wyruszy z Łoziny oraz Wrocławia. Autokar po uroczystości weselnej również wraca do Wrocławia i Łoziny, szczegółową lokalizacje podamy w późniejszym terminie."
     },
     {
       title: "Dzieci",
