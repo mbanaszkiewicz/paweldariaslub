@@ -4,6 +4,9 @@ export const weddingData = {
 
   weddingDate: "2027-07-03T17:00:00",
 
+  announcement:
+    "Ta strona jest zapowiedzią naszego wyjątkowego dnia. Oficjalne zaproszenia prześlemy Wam w późniejszym terminie.",
+
   venue: {
     name: "Sala Maksymiliana w Zamku Książ",
     address: "Wałbrzych",

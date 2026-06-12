@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Announcement from "@/components/Announcement";
 import Countdown from "@/components/Countdown";
 import Schedule from "@/components/Schedule";
 import InfoCards from "@/components/InfoCards";
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Announcement />
       <Countdown />
       <Schedule />
       <InfoCards />

@@ -1,4 +1,4 @@
-import { User, Phone } from "lucide-react";
+import { User } from "lucide-react";
 import { weddingData } from "@/config/wedding";
 
 function WhatsAppIcon({ size = 14 }: { size?: number }) {
@@ -54,27 +54,16 @@ export default function ContactSection() {
               </p>
 
               {c.phone && (
-                <div className="flex flex-col items-center gap-3">
-                  <a
-                    href={`tel:${c.phone.replace(/\s/g, "")}`}
-                    className="inline-flex items-center gap-2 text-sm transition-opacity hover:opacity-70"
-                    style={{ color: "#666", fontFamily: "var(--font-lato)", fontWeight: 300 }}
-                  >
-                    <Phone size={14} strokeWidth={1.5} />
-                    {c.phone}
-                  </a>
-
-                  <a
-                    href={`https://wa.me/${c.phone.replace(/\D/g, "")}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-sm transition-opacity hover:opacity-70"
-                    style={{ color: "#25D366", fontFamily: "var(--font-lato)", fontWeight: 300 }}
-                  >
-                    <WhatsAppIcon size={15} />
-                    WhatsApp
-                  </a>
-                </div>
+                <a
+                  href={`https://wa.me/${c.phone.replace(/\D/g, "")}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-sm transition-opacity hover:opacity-70"
+                  style={{ color: "#25D366", fontFamily: "var(--font-lato)", fontWeight: 300 }}
+                >
+                  <WhatsAppIcon size={15} />
+                  {c.phone}
+                </a>
               )}
             </div>
           ))}
