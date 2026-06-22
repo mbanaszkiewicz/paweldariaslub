@@ -17,7 +17,8 @@ export default function Announcement() {
             fontFamily: "var(--font-cormorant)",
             fontStyle: "italic",
             fontWeight: 400,
-            fontSize: "1.35rem"
+            fontSize: "1.35rem",
+            whiteSpace: "pre-line"
           }}
         >
           {weddingData.announcement}

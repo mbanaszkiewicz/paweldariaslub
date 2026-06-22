@@ -16,6 +16,12 @@ const icons = [
     <path d="M3 16 Q3 8 12 8 Q21 8 21 16"/>
     <line x1="12" y1="8" x2="12" y2="5"/>
     <circle cx="12" cy="4.5" r="1.5"/>
+  </svg>,
+  // music note (party till dawn)
+  <svg key="music" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 18V5l12-2v13"/>
+    <circle cx="6" cy="18" r="3"/>
+    <circle cx="18" cy="16" r="3"/>
   </svg>
 ];
 

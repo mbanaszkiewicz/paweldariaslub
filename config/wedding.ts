@@ -5,7 +5,7 @@ export const weddingData = {
   weddingDate: "2027-07-03T17:00:00",
 
   announcement:
-    "Ta strona jest zapowiedzią naszego wyjątkowego dnia. Oficjalne zaproszenia prześlemy Wam w późniejszym terminie.",
+    "Ta strona jest zapowiedzią naszego wyjątkowego dnia. Oficjalne zaproszenia prześlemy Wam w późniejszym terminie.\nZaglądajcie tu od czasu do czasu — strona będzie na bieżąco aktualizowana o nowe informacje.",
 
   venue: {
     name: "Sala Maksymiliana w Zamku Książ",
@@ -18,7 +18,8 @@ export const weddingData = {
     { time: "17:20", title: "Toast i zdjęcia z najbliższą rodziną" },
     { time: "18:15", title: "Zdjęcia grupowe przed zamkiem" },
     { time: "18:30", title: "Wejście do sali balowej, życzenia" },
-    { time: "19:30", title: "Rozpoczęcie serwowania kolacji" }
+    { time: "19:30", title: "Rozpoczęcie serwowania kolacji" },
+    { time: "20:30", title: "Zabawa weselna do białego rana" }
   ],
 
   organization: [
