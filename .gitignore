@@ -14,3 +14,12 @@ out/
 .DS_Store
 *.pem
 npm-debug.log*
+
+# Sekrety i klucze
+.env.*
+!.env.example
+!.env.test
+*.key
+*.jks
+*.keystore
+local.properties
