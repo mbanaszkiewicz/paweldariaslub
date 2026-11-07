@@ -7,6 +7,7 @@ import { weddingData } from "@/config/wedding";
 const attendanceOptions = ["Będę", "Nie będę"];
 const dinnerOptions = ["Mięsna", "Wege"];
 const transportOptions = ["Własny", "Autokar z Wrocławia", "Autokar z Łoziny"];
+const returnOptions = ["Powrót autokarem", "Nocleg na miejscu"];
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -81,6 +82,7 @@ export default function TransportForm() {
   const [companionDinner, setCompanionDinner] = useState("");
   const [transport, setTransport] = useState("");
   const [stop, setStop] = useState("");
+  const [ret, setRet] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
   const absent = attendance === "Nie będę";
@@ -107,7 +109,8 @@ export default function TransportForm() {
           "Osoba towarzysząca": hasCompanion ? companion.trim() : absent ? "nie dotyczy" : "brak",
           "Kolacja osoby towarzyszącej": hasCompanion ? companionDinner : "nie dotyczy",
           "Transport": absent ? "nie dotyczy" : transport,
-          "Preferowane miejsce przystanku": isBus ? stop.trim() || "brak" : "nie dotyczy"
+          "Preferowana miejscowość odbioru": isBus ? stop.trim() || "brak" : "nie dotyczy",
+          "Powrót": isBus ? ret : "nie dotyczy"
         })
       });
       const data = await res.json();
@@ -238,7 +241,7 @@ export default function TransportForm() {
             {isBus && (
               <div className="flex flex-col gap-2">
                 <label htmlFor="tf-stop" style={labelStyle}>
-                  Preferowane miejsce przystanku
+                  Preferowana miejscowość odbioru
                 </label>
                 <input
                   id="tf-stop"
@@ -249,6 +252,15 @@ export default function TransportForm() {
                   style={inputStyle}
                 />
               </div>
+            )}
+
+            {isBus && (
+              <fieldset className="flex flex-col gap-3">
+                <legend className="mb-3" style={labelStyle}>
+                  Powrót
+                </legend>
+                <Choice name="return" options={returnOptions} value={ret} onChange={setRet} required />
+              </fieldset>
             )}
 
             {status === "error" && (
