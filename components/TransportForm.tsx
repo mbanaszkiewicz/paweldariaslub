@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Bus } from "lucide-react";
 import { weddingData } from "@/config/wedding";
 
+const attendanceOptions = ["Będę", "Nie będę"];
 const dinnerOptions = ["Mięsna", "Wege"];
 const transportOptions = ["Własny", "Autokar z Wrocławia", "Autokar z Łoziny"];
 
@@ -74,6 +75,7 @@ function Choice({
 
 export default function TransportForm() {
   const [name, setName] = useState("");
+  const [attendance, setAttendance] = useState("");
   const [dinner, setDinner] = useState("");
   const [companion, setCompanion] = useState("");
   const [companionDinner, setCompanionDinner] = useState("");
@@ -81,8 +83,9 @@ export default function TransportForm() {
   const [stop, setStop] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
-  const hasCompanion = companion.trim() !== "";
-  const isBus = transport.startsWith("Autokar");
+  const absent = attendance === "Nie będę";
+  const hasCompanion = !absent && companion.trim() !== "";
+  const isBus = !absent && transport.startsWith("Autokar");
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -96,13 +99,14 @@ export default function TransportForm() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: weddingData.formAccessKey,
-          subject: `Transport i kolacja: ${name.trim()}`,
+          subject: `${absent ? "Nieobecność" : "Transport i kolacja"}: ${name.trim()}`,
           from_name: "Strona ślubu Darii i Pawła",
           "Imię i nazwisko": name.trim(),
-          "Kolacja": dinner,
-          "Osoba towarzysząca": hasCompanion ? companion.trim() : "brak",
+          "Obecność": attendance,
+          "Kolacja": absent ? "nie dotyczy" : dinner,
+          "Osoba towarzysząca": hasCompanion ? companion.trim() : absent ? "nie dotyczy" : "brak",
           "Kolacja osoby towarzyszącej": hasCompanion ? companionDinner : "nie dotyczy",
-          "Transport": transport,
+          "Transport": absent ? "nie dotyczy" : transport,
           "Preferowane miejsce przystanku": isBus ? stop.trim() || "brak" : "nie dotyczy"
         })
       });
@@ -171,11 +175,27 @@ export default function TransportForm() {
 
             <fieldset className="flex flex-col gap-3">
               <legend className="mb-3" style={labelStyle}>
+                Obecność
+              </legend>
+              <Choice
+                name="attendance"
+                options={attendanceOptions}
+                value={attendance}
+                onChange={setAttendance}
+                required
+              />
+            </fieldset>
+
+            {!absent && (
+            <fieldset className="flex flex-col gap-3">
+              <legend className="mb-3" style={labelStyle}>
                 Kolacja
               </legend>
               <Choice name="dinner" options={dinnerOptions} value={dinner} onChange={setDinner} required />
             </fieldset>
+            )}
 
+            {!absent && (
             <div className="flex flex-col gap-2">
               <label htmlFor="tf-companion" style={labelStyle}>
                 Osoba towarzysząca (imię i nazwisko)
@@ -189,6 +209,7 @@ export default function TransportForm() {
                 style={inputStyle}
               />
             </div>
+            )}
 
             {hasCompanion && (
               <fieldset className="flex flex-col gap-3">
@@ -205,12 +226,14 @@ export default function TransportForm() {
               </fieldset>
             )}
 
+            {!absent && (
             <fieldset className="flex flex-col gap-3">
               <legend className="mb-3" style={labelStyle}>
                 Transport
               </legend>
               <Choice name="transport" options={transportOptions} value={transport} onChange={setTransport} required />
             </fieldset>
+            )}
 
             {isBus && (
               <div className="flex flex-col gap-2">
