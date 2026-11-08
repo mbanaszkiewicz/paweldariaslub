@@ -37,7 +37,7 @@ export const weddingData = {
     },
     {
       title: "Menu",
-      text: "Przygotowaliśmy dwie opcje menu: mięsne oraz wegańskie. Prosimy o zgłoszenie wybranego wariantu telefonicznie przy potwierdzaniu obecności."
+      text: "Przygotowaliśmy dwie opcje menu: mięsne oraz wegańskie. Prosimy o zaznaczenie wybranego wariantu w formularzu poniżej."
     }
   ],
 
@@ -57,5 +57,7 @@ export const weddingData = {
     }
   ],
 
-  photoShareUrl: process.env.NEXT_PUBLIC_PHOTO_URL ?? ""
+  photoShareUrl: process.env.NEXT_PUBLIC_PHOTO_URL ?? "",
+
+  formAccessKey: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? ""
 };

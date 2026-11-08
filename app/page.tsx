@@ -3,6 +3,7 @@ import Announcement from "@/components/Announcement";
 import Countdown from "@/components/Countdown";
 import Schedule from "@/components/Schedule";
 import InfoCards from "@/components/InfoCards";
+import TransportForm from "@/components/TransportForm";
 import GiftSection from "@/components/GiftSection";
 import ContactSection from "@/components/ContactSection";
 import PhotoUpload from "@/components/PhotoUpload";
@@ -15,6 +16,7 @@ export default function Home() {
       <Countdown />
       <Schedule />
       <InfoCards />
+      <TransportForm />
       <GiftSection />
       <PhotoUpload />
       <ContactSection />
